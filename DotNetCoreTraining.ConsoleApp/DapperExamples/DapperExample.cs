@@ -5,33 +5,33 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dapper;
+using DotNetCoreTraining.ConsoleApp.Models;
+using System.Runtime.CompilerServices;
 
 namespace DotNetCoreTraining.ConsoleApp.DapperExamples
 {
     public class DapperExample
     {
+        SqlConnectionStringBuilder sqlConnectionStringBuilder = new SqlConnectionStringBuilder
+        {
+            DataSource = ".",
+            InitialCatalog = "TestDb",
+            IntegratedSecurity = true
+        };
+
         public void Read()
         {
-            DataTable dt = new DataTable();
             string query = "select * from Tbl_Blog";
 
-            SqlConnectionStringBuilder sqlConnectionStringBuilder = new SqlConnectionStringBuilder();
-            sqlConnectionStringBuilder.DataSource = ".";
-            sqlConnectionStringBuilder.InitialCatalog = "TestDb";
-            sqlConnectionStringBuilder.IntegratedSecurity = true;
-            SqlConnection sqlConnection = new SqlConnection(sqlConnectionStringBuilder.ConnectionString);
+            using IDbConnection db = new SqlConnection(sqlConnectionStringBuilder.ConnectionString);
+            List<BlogModel> lstBlog = db.Query<BlogModel>(query).ToList();
 
-            sqlConnection.Open();
-            SqlCommand cmd = new SqlCommand(query, sqlConnection);
-            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-            adapter.Fill(dt);
-            sqlConnection.Close();
-
-            foreach (DataRow dr in dt.Rows)
+            foreach (BlogModel item in lstBlog)
             {
-                Console.WriteLine($"Title : {dr["BlogTitle"]}");
-                Console.WriteLine($"Author : {dr["BlogAuthor"]}");
-                Console.WriteLine($"Content : {dr["BlogContent"]}");
+                Console.WriteLine($"Title : {item.BlogTitle}");
+                Console.WriteLine($"Author : {item.BlogAuthor}");
+                Console.WriteLine($"Content : {item.BlogContent}");
             }
         }
 
@@ -40,29 +40,18 @@ namespace DotNetCoreTraining.ConsoleApp.DapperExamples
             DataTable dt = new DataTable();
             string query = "select * from Tbl_Blog where BlogId = @BlogId";
 
-            SqlConnectionStringBuilder sqlConnectionStringBuilder = new SqlConnectionStringBuilder();
-            sqlConnectionStringBuilder.DataSource = ".";
-            sqlConnectionStringBuilder.InitialCatalog = "TestDb";
-            sqlConnectionStringBuilder.IntegratedSecurity = true;
-            SqlConnection sqlConnection = new SqlConnection(sqlConnectionStringBuilder.ConnectionString);
+            using IDbConnection db = new SqlConnection(sqlConnectionStringBuilder.ConnectionString);
+            var item = db.Query<BlogModel>(query, new { BlogId = id }).FirstOrDefault();
 
-            sqlConnection.Open();
-            SqlCommand cmd = new SqlCommand(query, sqlConnection);
-            cmd.Parameters.AddWithValue("@BlogId", id);
-            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-            adapter.Fill(dt);
-            sqlConnection.Close();
-
-            if (dt.Rows.Count == 0)
+            if (item == null)
             {
                 Console.WriteLine("No data found!");
                 return;
             }
 
-            DataRow dr = dt.Rows[0];
-            Console.WriteLine($"Title : {dr["BlogTitle"]}");
-            Console.WriteLine($"Author : {dr["BlogAuthor"]}");
-            Console.WriteLine($"Content : {dr["BlogContent"]}");
+            Console.WriteLine($"Title : {item.BlogTitle}");
+            Console.WriteLine($"Author : {item.BlogAuthor}");
+            Console.WriteLine($"Content : {item.BlogContent}");
         }
 
         public void Create(string title, string author, string content)
@@ -76,19 +65,15 @@ namespace DotNetCoreTraining.ConsoleApp.DapperExamples
                                ,@BlogAuthor
                                ,@BlogContent)";
 
-            SqlConnectionStringBuilder sqlConnectionStringBuilder = new SqlConnectionStringBuilder();
-            sqlConnectionStringBuilder.DataSource = ".";
-            sqlConnectionStringBuilder.InitialCatalog = "TestDb";
-            sqlConnectionStringBuilder.IntegratedSecurity = true;
-            SqlConnection sqlConnection = new SqlConnection(sqlConnectionStringBuilder.ConnectionString);
+            BlogModel blogModel = new BlogModel
+            {
+                BlogTitle = title,
+                BlogAuthor = author,
+                BlogContent = content
+            };
 
-            sqlConnection.Open();
-            SqlCommand cmd = new SqlCommand(query, sqlConnection);
-            cmd.Parameters.AddWithValue("@BlogTitle", title);
-            cmd.Parameters.AddWithValue("@BlogAuthor", author);
-            cmd.Parameters.AddWithValue("@BlogContent", content);
-            var result = cmd.ExecuteNonQuery();
-            sqlConnection.Close();
+            using IDbConnection db = new SqlConnection(sqlConnectionStringBuilder.ConnectionString);
+            int result = db.Execute(query, blogModel);
 
             var message = result == 0 ? "Create Fail!" : "Create Success.";
             Console.WriteLine(message);
@@ -102,20 +87,16 @@ namespace DotNetCoreTraining.ConsoleApp.DapperExamples
                                   ,[BlogContent] = @BlogContent
                              WHERE [BlogId] = @BlogId";
 
-            SqlConnectionStringBuilder sqlConnectionStringBuilder = new SqlConnectionStringBuilder();
-            sqlConnectionStringBuilder.DataSource = ".";
-            sqlConnectionStringBuilder.InitialCatalog = "TestDb";
-            sqlConnectionStringBuilder.IntegratedSecurity = true;
-            SqlConnection sqlConnection = new SqlConnection(sqlConnectionStringBuilder.ConnectionString);
+            BlogModel blogModel = new BlogModel
+            {
+                BlogId = id,
+                BlogTitle = title,
+                BlogAuthor = author,
+                BlogContent = content
+            };
 
-            sqlConnection.Open();
-            SqlCommand cmd = new SqlCommand(query, sqlConnection);
-            cmd.Parameters.AddWithValue("@BlogId", id);
-            cmd.Parameters.AddWithValue("@BlogTitle", title);
-            cmd.Parameters.AddWithValue("@BlogAuthor", author);
-            cmd.Parameters.AddWithValue("@BlogContent", content);
-            var result = cmd.ExecuteNonQuery();
-            sqlConnection.Close();
+            using IDbConnection db = new SqlConnection(sqlConnectionStringBuilder.ConnectionString);
+            var result = db.Execute(query, blogModel);
 
             var message = result == 0 ? "Edit Fail!" : "Edit Success.";
             Console.WriteLine(message);
@@ -126,17 +107,8 @@ namespace DotNetCoreTraining.ConsoleApp.DapperExamples
             string query = @"DELETE FROM [dbo].[Tbl_Blog]
                             WHERE [BlogId] = @BlogId";
 
-            SqlConnectionStringBuilder sqlConnectionStringBuilder = new SqlConnectionStringBuilder();
-            sqlConnectionStringBuilder.DataSource = ".";
-            sqlConnectionStringBuilder.InitialCatalog = "TestDb";
-            sqlConnectionStringBuilder.IntegratedSecurity = true;
-            SqlConnection sqlConnection = new SqlConnection(sqlConnectionStringBuilder.ConnectionString);
-
-            sqlConnection.Open();
-            SqlCommand cmd = new SqlCommand(query, sqlConnection);
-            cmd.Parameters.AddWithValue("@BlogId", id);
-            var result = cmd.ExecuteNonQuery();
-            sqlConnection.Close();
+            using IDbConnection db = new SqlConnection(sqlConnectionStringBuilder.ConnectionString);
+            var result = db.Execute(query, new { BlogId = id });
 
             var message = result == 0 ? "Delete Fail!" : "Delete Success.";
             Console.WriteLine(message);
