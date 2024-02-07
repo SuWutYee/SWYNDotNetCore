@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection.Metadata;
 
 namespace DotNetCoreTraining.ConsoleApp.AdoDotNetExamples
 {
@@ -67,17 +68,82 @@ namespace DotNetCoreTraining.ConsoleApp.AdoDotNetExamples
 
         public void Create(string title, string author, string content)
         {
+            string query = @"INSERT INTO [dbo].[Tbl_Blog]
+                               ([BlogTitle]
+                               ,[BlogAuthor]
+                               ,[BlogContent])
+                         VALUES
+                               (@BlogTitle
+                               ,@BlogAuthor
+                               ,@BlogContent)";
 
+            SqlConnectionStringBuilder sqlConnectionStringBuilder = new SqlConnectionStringBuilder();
+            sqlConnectionStringBuilder.DataSource = ".";
+            sqlConnectionStringBuilder.InitialCatalog = "TestDb";
+            sqlConnectionStringBuilder.IntegratedSecurity = true;
+            SqlConnection sqlConnection = new SqlConnection(sqlConnectionStringBuilder.ConnectionString);
+
+            sqlConnection.Open();
+            SqlCommand cmd = new SqlCommand(query, sqlConnection);
+            cmd.Parameters.AddWithValue("@BlogTitle", title);
+            cmd.Parameters.AddWithValue("@BlogAuthor", author);
+            cmd.Parameters.AddWithValue("@BlogContent", content);
+            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+            var result = cmd.ExecuteNonQuery();
+            sqlConnection.Close();
+
+            var message = result == 0 ? "Create Fail!" : "Create Success.";
+            Console.WriteLine(message);
         }
 
         public void Update(int id, string title, string author, string content)
         {
+            string query = @"UPDATE [dbo].[Tbl_Blog]
+                               SET [BlogTitle] = @BlogTitle
+                                  ,[BlogAuthor] = @BlogAuthor
+                                  ,[BlogContent] = @BlogContent
+                             WHERE [BlogId] = @BlogId";
 
+            SqlConnectionStringBuilder sqlConnectionStringBuilder = new SqlConnectionStringBuilder();
+            sqlConnectionStringBuilder.DataSource = ".";
+            sqlConnectionStringBuilder.InitialCatalog = "TestDb";
+            sqlConnectionStringBuilder.IntegratedSecurity = true;
+            SqlConnection sqlConnection = new SqlConnection(sqlConnectionStringBuilder.ConnectionString);
+
+            sqlConnection.Open();
+            SqlCommand cmd = new SqlCommand(query, sqlConnection);
+            cmd.Parameters.AddWithValue("@BlogId", id);
+            cmd.Parameters.AddWithValue("@BlogTitle", title);
+            cmd.Parameters.AddWithValue("@BlogAuthor", author);
+            cmd.Parameters.AddWithValue("@BlogContent", content);
+            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+            var result = cmd.ExecuteNonQuery();
+            sqlConnection.Close();
+
+            var message = result == 0 ? "Edit Fail!" : "Edit Success.";
+            Console.WriteLine(message);
         }
 
         public void Delete(int id)
         {
+            string query = @"DELETE FROM [dbo].[Tbl_Blog]
+                            WHERE [BlogId] = @BlogId";
 
+            SqlConnectionStringBuilder sqlConnectionStringBuilder = new SqlConnectionStringBuilder();
+            sqlConnectionStringBuilder.DataSource = ".";
+            sqlConnectionStringBuilder.InitialCatalog = "TestDb";
+            sqlConnectionStringBuilder.IntegratedSecurity = true;
+            SqlConnection sqlConnection = new SqlConnection(sqlConnectionStringBuilder.ConnectionString);
+
+            sqlConnection.Open();
+            SqlCommand cmd = new SqlCommand(query, sqlConnection);
+            cmd.Parameters.AddWithValue("@BlogId", id);
+            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+            var result = cmd.ExecuteNonQuery();
+            sqlConnection.Close();
+
+            var message = result == 0 ? "Delete Fail!" : "Delete Success.";
+            Console.WriteLine(message);
         }
     }
 }
