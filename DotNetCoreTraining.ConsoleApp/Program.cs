@@ -6,10 +6,14 @@ Console.WriteLine("Hello, World!");
 #region Ado Dot Net Example 
 
 AdoDotNetExample ado = new AdoDotNetExample();
-ado.Read();
-ado.Edit(3);
+//ado.Read();
+//ado.Edit(3);
 ado.Create("testTitle", "testAuthor", "testContent");
-ado.Update(2, "testTitle1", "testAuthor1", "testContent1");
-ado.Delete(3);
+ado.Update(6, "testTitle2", "testAuthor2", "testContent2");
+ado.Delete(4);
+
+#endregion
+
+#region Dapper Example
 
 #endregion

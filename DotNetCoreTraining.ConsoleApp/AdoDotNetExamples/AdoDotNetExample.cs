@@ -88,7 +88,6 @@ namespace DotNetCoreTraining.ConsoleApp.AdoDotNetExamples
             cmd.Parameters.AddWithValue("@BlogTitle", title);
             cmd.Parameters.AddWithValue("@BlogAuthor", author);
             cmd.Parameters.AddWithValue("@BlogContent", content);
-            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
             var result = cmd.ExecuteNonQuery();
             sqlConnection.Close();
 
@@ -116,7 +115,6 @@ namespace DotNetCoreTraining.ConsoleApp.AdoDotNetExamples
             cmd.Parameters.AddWithValue("@BlogTitle", title);
             cmd.Parameters.AddWithValue("@BlogAuthor", author);
             cmd.Parameters.AddWithValue("@BlogContent", content);
-            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
             var result = cmd.ExecuteNonQuery();
             sqlConnection.Close();
 
@@ -138,7 +136,6 @@ namespace DotNetCoreTraining.ConsoleApp.AdoDotNetExamples
             sqlConnection.Open();
             SqlCommand cmd = new SqlCommand(query, sqlConnection);
             cmd.Parameters.AddWithValue("@BlogId", id);
-            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
             var result = cmd.ExecuteNonQuery();
             sqlConnection.Close();
 
