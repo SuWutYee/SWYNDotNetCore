@@ -5,4 +5,4 @@ Console.WriteLine("Hello, World!");
 
 AdoDotNetExample ado = new AdoDotNetExample();
 ado.Read();
-
+ado.Edit(1);
