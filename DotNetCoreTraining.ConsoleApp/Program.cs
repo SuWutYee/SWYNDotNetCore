@@ -5,12 +5,12 @@ Console.WriteLine("Hello, World!");
 
 #region Ado Dot Net Example 
 
-AdoDotNetExample ado = new AdoDotNetExample();
+//AdoDotNetExample ado = new AdoDotNetExample();
 //ado.Read();
 //ado.Edit(3);
-ado.Create("testTitle", "testAuthor", "testContent");
-ado.Update(6, "testTitle2", "testAuthor2", "testContent2");
-ado.Delete(4);
+//ado.Create("testTitle", "testAuthor", "testContent");
+//ado.Update(6, "testTitle2", "testAuthor2", "testContent2");
+//ado.Delete(4);
 
 #endregion
 
