@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using DotNetCoreTraining.ConsoleApp.AdoDotNetExamples;
 using DotNetCoreTraining.ConsoleApp.DapperExamples;
+using DotNetCoreTraining.ConsoleApp.EfCoreExamples;
 
 Console.WriteLine("Hello, World!");
 
@@ -17,11 +18,22 @@ Console.WriteLine("Hello, World!");
 
 #region Dapper Example
 
-DapperExample dapper = new DapperExample();
+//DapperExample dapper = new DapperExample();
 //dapper.Read();
 //dapper.Edit(1);
 //dapper.Create("testTitle1", "testAuthor1", "testContent1");
 //dapper.Update(1, "testTitle2", "testAuthor2", "testContent2");
-dapper.Delete(2);
+//dapper.Delete(2);
+
+#endregion
+
+#region Ef Core Examples
+
+EfCoreExample dbo = new EfCoreExample();
+dbo.Read();
+dbo.Edit(1);
+dbo.Create("testTitle3", "testAuthor3", "testContent3");
+dbo.Update(5, "testTitle5", "testAuthor5", "testContent5");
+dbo.Delete(7);
 
 #endregion
