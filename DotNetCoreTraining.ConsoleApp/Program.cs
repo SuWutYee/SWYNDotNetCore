@@ -2,6 +2,7 @@
 using DotNetCoreTraining.ConsoleApp.AdoDotNetExamples;
 using DotNetCoreTraining.ConsoleApp.DapperExamples;
 using DotNetCoreTraining.ConsoleApp.EfCoreExamples;
+using DotNetCoreTraining.ConsoleApp.HttpClientExamples;
 
 Console.WriteLine("Hello, World!");
 
@@ -29,11 +30,18 @@ Console.WriteLine("Hello, World!");
 
 #region Ef Core Examples
 
-EfCoreExample dbo = new EfCoreExample();
-dbo.Read();
-dbo.Edit(1);
-dbo.Create("testTitle3", "testAuthor3", "testContent3");
-dbo.Update(5, "testTitle5", "testAuthor5", "testContent5");
-dbo.Delete(7);
+//EfCoreExample dbo = new EfCoreExample();
+//dbo.Read();
+//dbo.Edit(1);
+//dbo.Create("testTitle3", "testAuthor3", "testContent3");
+//dbo.Update(5, "testTitle5", "testAuthor5", "testContent5");
+//dbo.Delete(7);
+
+#endregion
+
+#region HttpClient Examples
+
+HttpClientExample httpClient = new HttpClientExample();
+httpClient.Run();
 
 #endregion
