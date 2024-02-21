@@ -12,5 +12,8 @@ namespace DotNetCoreTraining.ConsoleApp.RefitExamples
     {
         [Get("/api/Blog")]
         Task<List<BlogModel>> GetBlogs();
+
+        [Get("/api/Blog")]
+        Task<BlogModel> GetBlogById(int id);
     }
 }
