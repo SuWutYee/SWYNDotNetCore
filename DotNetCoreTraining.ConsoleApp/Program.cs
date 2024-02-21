@@ -5,6 +5,8 @@ using DotNetCoreTraining.ConsoleApp.EfCoreExamples;
 using DotNetCoreTraining.ConsoleApp.HttpClientExamples;
 
 Console.WriteLine("Hello, World!");
+Console.WriteLine("Waiting API.......");
+Console.ReadLine();
 
 #region Ado Dot Net Example 
 
@@ -45,3 +47,5 @@ HttpClientExample httpClient = new HttpClientExample();
 httpClient.Run();
 
 #endregion
+
+Console.ReadLine();
