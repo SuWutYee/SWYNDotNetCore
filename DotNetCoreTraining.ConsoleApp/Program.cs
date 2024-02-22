@@ -3,8 +3,11 @@ using DotNetCoreTraining.ConsoleApp.AdoDotNetExamples;
 using DotNetCoreTraining.ConsoleApp.DapperExamples;
 using DotNetCoreTraining.ConsoleApp.EfCoreExamples;
 using DotNetCoreTraining.ConsoleApp.HttpClientExamples;
+using DotNetCoreTraining.ConsoleApp.RefitExamples;
 
 Console.WriteLine("Hello, World!");
+Console.WriteLine("Waiting API.......");
+Console.ReadLine();
 
 #region Ado Dot Net Example 
 
@@ -41,7 +44,16 @@ Console.WriteLine("Hello, World!");
 
 #region HttpClient Examples
 
-HttpClientExample httpClient = new HttpClientExample();
-httpClient.Run();
+//HttpClientExample httpClient = new HttpClientExample();
+//httpClient.Run();
 
 #endregion
+
+#region Refit Examples
+
+RefitExample refit = new RefitExample();
+refit.Run();
+
+#endregion
+
+Console.ReadLine();
