@@ -11,9 +11,15 @@ namespace DotNetCoreTraining.ConsoleApp.RefitExamples
     public interface IBlogApi
     {
         [Get("/api/Blog")]
-        Task<List<BlogModel>> GetBlogs();
+        Task<IEnumerable<BlogModel>> GetBlogs();
 
-        [Get("/api/Blog")]
+        [Get("/api/Blog/{id}")]
         Task<BlogModel> GetBlogById(int id);
+
+        [Post("/api/Blog")]
+        Task<string> CreateBlog(BlogModel blog);
+
+        [Put("/api/Blog/{id}")]
+        Task<string> UpdateBlog(int id, BlogModel blog);
     }
 }
