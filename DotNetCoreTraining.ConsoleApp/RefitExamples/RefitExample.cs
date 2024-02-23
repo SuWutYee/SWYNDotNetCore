@@ -16,10 +16,10 @@ namespace DotNetCoreTraining.ConsoleApp.RefitExamples
         public async void Run()
         {
             await Read();
-            await Read(10);
-            await Create();
-            //await Update(2);
-            //await Delete(2);
+            await Read(100);
+            //await Create();
+            await Update(11);
+            await Delete(12);
         }
 
         private async Task Read()
@@ -39,14 +39,25 @@ namespace DotNetCoreTraining.ConsoleApp.RefitExamples
 
         private async Task Read(int id)
         {
-            var blogApi = RestService.For<IBlogApi>(_apiUrl);
-            var response = await blogApi.GetBlogById(id);
-            if (response != null)
+            try
             {
-                Console.WriteLine("....... Get Blog By Id .......");
-                Console.WriteLine(response.BlogTitle);
-                Console.WriteLine(response.BlogAuthor);
-                Console.WriteLine(response.BlogContent);
+                var blogApi = RestService.For<IBlogApi>(_apiUrl);
+                var response = await blogApi.GetBlogById(id);
+                if (response != null)
+                {
+                    Console.WriteLine("....... Get Blog By Id .......");
+                    Console.WriteLine(response.BlogTitle);
+                    Console.WriteLine(response.BlogAuthor);
+                    Console.WriteLine(response.BlogContent);
+                }
+            }
+            catch (Refit.ApiException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
             }
         }
 
@@ -63,30 +74,35 @@ namespace DotNetCoreTraining.ConsoleApp.RefitExamples
             Console.WriteLine(response!);
         }
 
-        //private async Task Update(int id)
-        //{
-        //    BlogModel blog = new BlogModel
-        //    {
-        //        BlogAuthor = "Su Wut Yee",
-        //        BlogTitle = "SWYN",
-        //        BlogContent = "SWYN Test"
-        //    };
-        //    HttpClient client = new HttpClient();
-        //    var response = await client.PutAsync($"https://localhost:7029/api/Blog/{id}", JsonContent.Create(blog));
-        //    if (response.IsSuccessStatusCode)
-        //    {
-        //        Console.WriteLine("Update Successfully!!!");
-        //    }
-        //}
+        private async Task Update(int id)
+        {
+            BlogModel blog = new BlogModel
+            {
+                BlogAuthor = "Su Wut Yee",
+                BlogTitle = "SWYN",
+                BlogContent = "SWYN Test"
+            };
+            var blogApi = RestService.For<IBlogApi>(_apiUrl);
+            var response = await blogApi.UpdateBlog(id, blog);
+            Console.WriteLine(response!);
+        }
 
-        //private async Task Delete(int id)
-        //{
-        //    HttpClient client = new HttpClient();
-        //    var response = await client.DeleteAsync($"https://localhost:7029/api/Blog/{id}");
-        //    if (response.IsSuccessStatusCode)
-        //    {
-        //        Console.WriteLine("Delete Successfully!!!");
-        //    }
-        //}
+        private async Task Delete(int id)
+        {
+            try
+            {
+                var blogApi = RestService.For<IBlogApi>(_apiUrl);
+                var response = await blogApi.DeleteBlog(id);
+                Console.WriteLine(response!);
+            }
+            catch (Refit.ApiException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
     }
 }

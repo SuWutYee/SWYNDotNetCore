@@ -21,5 +21,8 @@ namespace DotNetCoreTraining.ConsoleApp.RefitExamples
 
         [Put("/api/Blog/{id}")]
         Task<string> UpdateBlog(int id, BlogModel blog);
+
+        [Delete("/api/Blog/{id}")]
+        Task<string> DeleteBlog(int id);
     }
 }
