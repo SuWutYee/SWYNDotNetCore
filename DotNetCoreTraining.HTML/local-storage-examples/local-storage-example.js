@@ -21,13 +21,13 @@ function readBlog() {
     let item = lstBlog[i];
     console.log(
       "Id >>> " +
-        item.Id +
-        "Title >>> " +
-        item.Title +
-        " Author >>> " +
-        item.Author +
-        " Content >>> " +
-        item.Content
+      item.Id +
+      "Title >>> " +
+      item.Title +
+      " Author >>> " +
+      item.Author +
+      " Content >>> " +
+      item.Content
     );
   }
 }
@@ -57,13 +57,13 @@ function editBlog(id) {
   let item = lstResult[0];
   console.log(
     "Id >>> " +
-      item.Id +
-      "Title >>> " +
-      item.Title +
-      " Author >>> " +
-      item.Author +
-      " Content >>> " +
-      item.Content
+    item.Id +
+    "Title >>> " +
+    item.Title +
+    " Author >>> " +
+    item.Author +
+    " Content >>> " +
+    item.Content
   );
 }
 
