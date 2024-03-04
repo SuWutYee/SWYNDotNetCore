@@ -93,29 +93,31 @@ function updateBlog(id, title, author, content) {
 }
 
 function deleteBlog(id) {
-  Swal.fire({
-    title: "Confirm",
-    text: "Are you sure you want to delete this?",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonText: "Yes"
-  }).then((result) => {
-    if (result.isConfirmed) {
 
-      let lstBlog = getBlogs();
-      let lstItem = lstBlog.filter((x) => x.Id == id); // return array
-      if (lstItem.length == 0) {
-        console.log("No data found.");
-        return;
-      }
-      let lstResult = lstBlog.filter((x) => x.Id != id);
-      setLocalStorage(lstResult);
-      ShowSuccessMessage("Delete Successful.");
-      readBlog();
-
+  Notiflix.Confirm.show(
+    'Confirm',
+    'Are you sure you want to delete?',
+    'Yes',
+    'No',
+    function okCb() {
+      Notiflix.Block.arrows('#frmMain');
+      setTimeout(() => {
+        let lstBlog = getBlogs();
+        let lstItem = lstBlog.filter((x) => x.Id == id); // return array
+        if (lstItem.length == 0) {
+          console.log("No data found.");
+          return;
+        }
+        let lstResult = lstBlog.filter((x) => x.Id != id);
+        setLocalStorage(lstResult);
+        Notiflix.Block.remove('#frmMain');
+        ShowSuccessMessage("Delete Successful.");
+        readBlog();
+      }, 3000);
+    },
+    function cancelCb() {
     }
-  });
-
+  );
 }
 
 function uuidv4() {
@@ -147,13 +149,15 @@ $("#btnSave").click(function () {
   const content = $("#content").val();
 
   if (_blogId === '') {
-    createBlog(title, author, content);
-    // alert("Saving Successful.");
-    ShowSuccessMessage("Saving Successful.");
+    Notiflix.Loading.dots();
+    setTimeout(() => {
+      createBlog(title, author, content);
+      Notiflix.Loading.remove();
+      ShowSuccessMessage("Saving Successful.");
+    }, 3000);
   }
   else {
     updateBlog(_blogId, title, author, content);
-    // alert("Edit Successful.");
     ShowSuccessMessage("Edit Successful.");
     _blogId = '';
   }
@@ -168,9 +172,6 @@ $("#btnSave").click(function () {
 });
 
 function ShowSuccessMessage(message) {
-  Swal.fire({
-    title: "Success",
-    text: message,
-    icon: "success",
-  });
+  // Notiflix.Notify.success(message);
+  Notiflix.Report.success('Success', message, 'Ok');
 }
