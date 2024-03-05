@@ -16,6 +16,10 @@
       rel="stylesheet"
       href="local-storage-examples/plugins/notiflix-3.2.7/notiflix-3.2.7.min.css"
     />
+    <link
+      href="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-2.0.1/af-2.7.0/b-3.0.0/b-colvis-3.0.0/b-html5-3.0.0/b-print-3.0.0/cr-2.0.0/date-1.5.2/fc-5.0.0/fh-4.0.0/kt-2.12.0/r-3.0.0/rg-1.5.0/rr-1.5.0/sc-2.4.0/sb-1.7.0/sp-2.3.0/sl-2.0.0/sr-1.4.0/datatables.min.css"
+      rel="stylesheet"
+    />
   </head>
 
   <body>
@@ -45,7 +49,7 @@
         </button>
       </form>
 
-      <table class="table">
+      <table class="table" id="dtBlogDataTable">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -74,6 +78,11 @@
     <!-- <script src="local-storage-examples/jquery-plugins/ui-example-with-sweetalert.js"></script> -->
 
     <script src="local-storage-examples/plugins/notiflix-3.2.7/notiflix-3.2.7.min.js"></script>
-    <script src="local-storage-examples/jquery-plugins/ui-example-with-notiflix.js"></script>
+    <!-- <script src="local-storage-examples/jquery-plugins/ui-example-with-notiflix.js"></script> -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-2.0.1/af-2.7.0/b-3.0.0/b-colvis-3.0.0/b-html5-3.0.0/b-print-3.0.0/cr-2.0.0/date-1.5.2/fc-5.0.0/fh-4.0.0/kt-2.12.0/r-3.0.0/rg-1.5.0/rr-1.5.0/sc-2.4.0/sb-1.7.0/sp-2.3.0/sl-2.0.0/sr-1.4.0/datatables.min.js"></script>
+    <script src="local-storage-examples/jquery-plugins/ui-example-with-datatable.js"></script>
   </body>
 </html>

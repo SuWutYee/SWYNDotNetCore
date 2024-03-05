@@ -10,6 +10,9 @@ function runBlog() {
 }
 
 function readBlog() {
+  if ($.fn.DataTable.isDataTable('#dtBlogDataTable')) {
+    $('#dtBlogDataTable').DataTable().destroy();
+  }
   $("#tbBlog").html("");
   let lstBlog = getBlogs();
   let htmlBlog = "";
@@ -30,6 +33,7 @@ function readBlog() {
   }
   console.log(htmlBlog);
   $("#tbBlog").html(htmlBlog);
+  new DataTable('#dtBlogDataTable');
 }
 
 function createBlog(title, author, content) {
