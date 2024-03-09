@@ -5,7 +5,9 @@ VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetCoreTraining.ConsoleApp", "DotNetCoreTraining.ConsoleApp\DotNetCoreTraining.ConsoleApp.csproj", "{13C6B825-ED1B-4A62-9BDA-363FB22331C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetCoreTraining.WebApi", "DotNetCoreTraining.WebApi\DotNetCoreTraining.WebApi.csproj", "{907F9B35-DC7F-4E1B-A7B4-DA274AE4AA60}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetCoreTraining.WebApi", "DotNetCoreTraining.WebApi\DotNetCoreTraining.WebApi.csproj", "{907F9B35-DC7F-4E1B-A7B4-DA274AE4AA60}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetCoreTraining.MvcApp", "DotNetCoreTraining.MvcApp\DotNetCoreTraining.MvcApp.csproj", "{77C7F86F-6244-447E-9A59-559C24D5192C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{907F9B35-DC7F-4E1B-A7B4-DA274AE4AA60}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{907F9B35-DC7F-4E1B-A7B4-DA274AE4AA60}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{907F9B35-DC7F-4E1B-A7B4-DA274AE4AA60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77C7F86F-6244-447E-9A59-559C24D5192C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77C7F86F-6244-447E-9A59-559C24D5192C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77C7F86F-6244-447E-9A59-559C24D5192C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77C7F86F-6244-447E-9A59-559C24D5192C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
