@@ -18,6 +18,17 @@ namespace DotNetCoreTraining.MvcApp.Models
         public string BlogContent { get; set; }
     }
 
+    [Table("Tbl_Chart")]
+    public class ChartModel
+    {
+        [Key]
+        public int Id { get; set; }
+        public int TeamA { get; set; }
+        public int TeamB { get; set; }
+        public int TeamC { get; set; }
+        public DateTime Label { get; set; }
+    }
+
     public class BlogMessageResponseModel
     {
         public bool IsSuccess { get; set; }

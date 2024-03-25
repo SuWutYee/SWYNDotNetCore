@@ -17,7 +17,9 @@ namespace DotNetCoreTraining.MvcApp.Controllers
 
         public IActionResult MixedLineColumnAreaChart()
         {
-            return View();
+            BlogDbContext context = new BlogDbContext();
+            var lstChart = context.Charts.ToList();
+            return View(lstChart);
         }
     }
 }

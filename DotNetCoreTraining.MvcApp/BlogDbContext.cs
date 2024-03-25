@@ -19,5 +19,6 @@ namespace DotNetCoreTraining.MvcApp
         }
 
         public DbSet<BlogModel> Blogs { get; set; }
+        public DbSet<ChartModel> Charts { get; set; }
     }
 }
