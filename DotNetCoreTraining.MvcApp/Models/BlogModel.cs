@@ -29,6 +29,16 @@ namespace DotNetCoreTraining.MvcApp.Models
         public DateTime Label { get; set; }
     }
 
+    [Table("Tbl_Pyramid")]
+    public class PyramidModel
+    {
+        [Key]
+        public int Id { get; set; }
+        public int Series { get; set; }
+        public string Color { get; set; }
+        public string Category { get; set; }
+    }
+
     public class BlogMessageResponseModel
     {
         public bool IsSuccess { get; set; }

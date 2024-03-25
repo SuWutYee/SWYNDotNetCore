@@ -21,5 +21,12 @@ namespace DotNetCoreTraining.MvcApp.Controllers
             var lstChart = context.Charts.ToList();
             return View(lstChart);
         }
+
+        public IActionResult PyramidChart()
+        {
+            BlogDbContext context = new BlogDbContext();
+            var lstPyramid = context.Pyramids.ToList();
+            return View(lstPyramid);
+        }
     }
 }

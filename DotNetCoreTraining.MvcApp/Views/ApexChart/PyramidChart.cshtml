@@ -1,0 +1,57 @@
+﻿@model List<PyramidModel>
+@{
+    List<int> _series = Model.Select(x => x.Series).ToList();
+    List<string> _color = Model.Select(x => x.Color).ToList();
+    List<string> _category = Model.Select(x => x.Category).ToList();
+}
+
+<div id="chart"></div>
+
+@section scripts{
+    <script>
+        var options = {
+            series: [
+                {
+                    name: "",
+                    data: @Html.Raw(JsonConvert.SerializeObject(_series)),
+                },
+            ],
+            chart: {
+                type: 'bar',
+                height: 350,
+            },
+            plotOptions: {
+                bar: {
+                    borderRadius: 0,
+                    horizontal: true,
+                    distributed: true,
+                    barHeight: '80%',
+                    isFunnel: true,
+                },
+            },
+            colors: @Html.Raw(JsonConvert.SerializeObject(_color)),
+            dataLabels: {
+                enabled: true,
+                formatter: function (val, opt) {
+                    return opt.w.globals.labels[opt.dataPointIndex]
+                },
+                dropShadow: {
+                    enabled: true,
+                },
+            },
+            title: {
+                text: 'Pyramid Chart',
+                align: 'middle',
+            },
+            xaxis: {
+                categories: @Html.Raw(JsonConvert.SerializeObject(_category)),
+            },
+            legend: {
+                show: false,
+            },
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+    </script>
+}
