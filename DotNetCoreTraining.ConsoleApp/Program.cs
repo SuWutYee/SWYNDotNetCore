@@ -7,7 +7,7 @@ using DotNetCoreTraining.ConsoleApp.RefitExamples;
 
 Console.WriteLine("Hello, World!");
 Console.WriteLine("Waiting API.......");
-Console.ReadLine();
+//Console.ReadLine();
 
 #region Ado Dot Net Example 
 
@@ -51,9 +51,20 @@ Console.ReadLine();
 
 #region Refit Examples
 
-RefitExample refit = new RefitExample();
-refit.Run();
+//RefitExample refit = new RefitExample();
+//refit.Run();
 
 #endregion
+
+BlogDbContext db = new BlogDbContext();
+int PageNo = 1;
+int PageSize = 10;
+int PageCount = 0;
+
+int rowCount = db.Blogs.Count();
+PageCount = rowCount / PageSize;
+Console.WriteLine("Page Count >>> " + PageCount);
+if (rowCount % PageSize > 0) PageCount++;
+Console.WriteLine("Page Count >>> " + PageCount);
 
 Console.ReadLine();

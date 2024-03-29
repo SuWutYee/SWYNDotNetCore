@@ -22,6 +22,31 @@ namespace DotNetCoreTraining.WebApi.Controllers
             return Ok(lstBlog);
         }
 
+        [HttpGet("{PageNo}/{PageSize}")]
+        public ActionResult GetBlogs(int PageNo,int PageSize)
+        {
+            BlogResponseModel model = new BlogResponseModel();
+
+            // Calculate Page Count
+            int rowCount = _db.Blogs.Count();
+            int pageCount = rowCount / PageSize;
+            if (rowCount % PageSize > 0) pageCount++;
+
+            // Page No Validation
+            if (PageNo > pageCount) return BadRequest(new { Message = "Invalid Page No." });
+
+            // Get Data By Page
+            var lst = _db.Blogs.Skip((PageNo -1) * PageSize).Take(PageSize).ToList();
+
+            // Assign Values
+            model.PageNo = PageNo;
+            model.PageSize = PageSize;
+            model.PageCount= pageCount;
+            model.Blogs = lst;
+
+            return Ok(model);
+        }
+
         [HttpGet("{id}")]
         public ActionResult GetBlog(int id)
         {
