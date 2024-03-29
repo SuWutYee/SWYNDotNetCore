@@ -56,15 +56,22 @@ Console.WriteLine("Waiting API.......");
 
 #endregion
 
-BlogDbContext db = new BlogDbContext();
-int PageNo = 1;
-int PageSize = 10;
-int PageCount = 0;
+//BlogDbContext db = new BlogDbContext();
+//int PageNo = 1;
+//int PageSize = 10;
+//int PageCount = 0;
 
-int rowCount = db.Blogs.Count();
-PageCount = rowCount / PageSize;
-Console.WriteLine("Page Count >>> " + PageCount);
-if (rowCount % PageSize > 0) PageCount++;
-Console.WriteLine("Page Count >>> " + PageCount);
+//int rowCount = db.Blogs.Count();
+//PageCount = rowCount / PageSize;
+//Console.WriteLine("Page Count >>> " + PageCount);
+//if (rowCount % PageSize > 0) PageCount++;
+//Console.WriteLine("Page Count >>> " + PageCount);
+
+//AdoDotNetExample db = new AdoDotNetExample();
+//for (int i = 0; i <= 391; i++)
+//{
+//    var count = i + 1;
+//    db.Create("title " + count, "author " + count, "content " + count);
+//}
 
 Console.ReadLine();
