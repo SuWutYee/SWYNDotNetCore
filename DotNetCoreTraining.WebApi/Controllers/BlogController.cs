@@ -23,6 +23,7 @@ namespace DotNetCoreTraining.WebApi.Controllers
         }
 
         [HttpGet("{PageNo}/{PageSize}")]
+        [HttpGet("PageNo/{PageNo}/PageSize/{PageSize}")]
         public ActionResult GetBlogs(int PageNo,int PageSize)
         {
             BlogResponseModel model = new BlogResponseModel();
