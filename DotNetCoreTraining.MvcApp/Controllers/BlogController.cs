@@ -7,9 +7,9 @@ namespace DotNetCoreTraining.MvcApp.Controllers
     {
         private readonly BlogDbContext _context;
 
-        public BlogController()
+        public BlogController(BlogDbContext context)
         {
-            _context = new BlogDbContext();
+            _context = context;
         }
 
         [ActionName("Index")]

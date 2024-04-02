@@ -5,6 +5,8 @@ namespace DotNetCoreTraining.MvcApp.Controllers
 {
     public class ApexChartController : Controller
     {
+        private readonly BlogDbContext _context;
+        public ApexChartController(BlogDbContext context) { _context = context; }
         public IActionResult RadarChart()
         {
             ApexChartResponseModel model = new ApexChartResponseModel
@@ -17,15 +19,13 @@ namespace DotNetCoreTraining.MvcApp.Controllers
 
         public IActionResult MixedLineColumnAreaChart()
         {
-            BlogDbContext context = new BlogDbContext();
-            var lstChart = context.Charts.ToList();
+            var lstChart = _context.Charts.ToList();
             return View(lstChart);
         }
 
         public IActionResult PyramidChart()
         {
-            BlogDbContext context = new BlogDbContext();
-            var lstPyramid = context.Pyramids.ToList();
+            var lstPyramid = _context.Pyramids.ToList();
             return View(lstPyramid);
         }
     }

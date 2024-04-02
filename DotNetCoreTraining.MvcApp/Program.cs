@@ -1,9 +1,28 @@
+using DotNetCoreTraining.MvcApp;
+using Microsoft.EntityFrameworkCore;
+using System.Data.SqlClient;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews().AddJsonOptions(opt =>
 opt.JsonSerializerOptions.PropertyNamingPolicy = null
 );
+
+// Database Context 
+builder.Services.AddDbContext<BlogDbContext>(opt =>
+{
+    //SqlConnectionStringBuilder sqlConnection = new SqlConnectionStringBuilder
+    //{
+    //    DataSource = ".",
+    //    InitialCatalog = "TestDb",
+    //    IntegratedSecurity = true,
+    //    TrustServerCertificate = true,
+    //};
+    //opt.UseSqlServer(sqlConnection.ConnectionString);
+
+    opt.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection"));
+}, ServiceLifetime.Transient, ServiceLifetime.Transient);
 
 var app = builder.Build();
 

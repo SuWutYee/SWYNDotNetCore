@@ -5,14 +5,17 @@ namespace DotNetCoreTraining.MvcApp.Controllers
 {
     public class BlogPaginationController : Controller
     {
+        private readonly BlogDbContext _context;
+
+        public BlogPaginationController(BlogDbContext context) { _context = context; }
+
         [ActionName("Index")]
         public IActionResult BlogIndex(int PageNo = 1, int PageSize = 10)
         { 
-            BlogDbContext _db = new BlogDbContext();
             BlogResponseModel model = new BlogResponseModel();
 
             // Calculate Page Count
-            int rowCount = _db.Blogs.Count();
+            int rowCount = _context.Blogs.Count();
             int pageCount = rowCount / PageSize;
             if (rowCount % PageSize > 0) pageCount++;
 
@@ -20,7 +23,7 @@ namespace DotNetCoreTraining.MvcApp.Controllers
             if (PageNo > pageCount) return BadRequest(new { Message = "Invalid Page No." });
 
             // Get Data By Page
-            var lst = _db.Blogs.Skip((PageNo - 1) * PageSize).Take(PageSize).ToList();
+            var lst = _context.Blogs.Skip((PageNo - 1) * PageSize).Take(PageSize).ToList();
 
             // Assign Values
             model.PageNo = PageNo;
