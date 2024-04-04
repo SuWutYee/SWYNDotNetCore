@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetCoreTraining.WebApi",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetCoreTraining.MvcApp", "DotNetCoreTraining.MvcApp\DotNetCoreTraining.MvcApp.csproj", "{77C7F86F-6244-447E-9A59-559C24D5192C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetCoreTraining.Shared", "DotNetCoreTraining.Shared\DotNetCoreTraining.Shared.csproj", "{3C0AB4E1-540C-432D-80D9-548CB25D8E87}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetCoreTraining.Shared", "DotNetCoreTraining.Shared\DotNetCoreTraining.Shared.csproj", "{3C0AB4E1-540C-432D-80D9-548CB25D8E87}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetCoreTraining.MvcApp2", "DotNetCoreTraining.MvcApp2\DotNetCoreTraining.MvcApp2.csproj", "{42A34909-17B8-4310-A22F-49517D290693}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{3C0AB4E1-540C-432D-80D9-548CB25D8E87}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C0AB4E1-540C-432D-80D9-548CB25D8E87}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C0AB4E1-540C-432D-80D9-548CB25D8E87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42A34909-17B8-4310-A22F-49517D290693}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42A34909-17B8-4310-A22F-49517D290693}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42A34909-17B8-4310-A22F-49517D290693}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42A34909-17B8-4310-A22F-49517D290693}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
