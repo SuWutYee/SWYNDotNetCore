@@ -1,4 +1,5 @@
 using DotNetCoreTraining.MvcApp;
+using DotNetCoreTraining.Shared;
 using Microsoft.EntityFrameworkCore;
 using System.Data.SqlClient;
 
@@ -23,6 +24,9 @@ builder.Services.AddDbContext<BlogDbContext>(opt =>
 
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection"));
 }, ServiceLifetime.Transient, ServiceLifetime.Transient);
+
+builder.Services.AddScoped(n => new AdoDotNetService(builder.Configuration.GetConnectionString("DbConnection")!));
+builder.Services.AddScoped(n => new DapperService(builder.Configuration.GetConnectionString("DbConnection")!));
 
 var app = builder.Build();
 
