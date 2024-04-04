@@ -1,14 +1,19 @@
+using RestSharp;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
 // Add HttpClient Service
-builder.Services.AddScoped<HttpClient>();
-builder.Services.AddScoped(n=>new HttpClient
-{
-    BaseAddress = new Uri(builder.Configuration.GetValue<string>("ApiUrl")!)
-});
+//builder.Services.AddScoped<HttpClient>();
+//builder.Services.AddScoped(n=>new HttpClient
+//{
+//    BaseAddress = new Uri(builder.Configuration.GetValue<string>("ApiUrl")!)
+//});
+
+// Add RestClient Service
+builder.Services.AddScoped(n => new RestClient(builder.Configuration.GetValue<string>("ApiUrl")!));
 
 var app = builder.Build();
 
