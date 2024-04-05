@@ -1,3 +1,5 @@
+using DotNetCoreTraining.MvcApp2;
+using Refit;
 using RestSharp;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +16,10 @@ builder.Services.AddControllersWithViews();
 
 // Add RestClient Service
 builder.Services.AddScoped(n => new RestClient(builder.Configuration.GetValue<string>("ApiUrl")!));
+
+builder.Services
+    .AddRefitClient<IBlogApi>()
+    .ConfigureHttpClient(c => c.BaseAddress = new Uri(builder.Configuration.GetValue<string>("ApiUrl")!));
 
 var app = builder.Build();
 

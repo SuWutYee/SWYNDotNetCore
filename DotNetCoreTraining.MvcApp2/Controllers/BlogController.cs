@@ -9,25 +9,17 @@ namespace DotNetCoreTraining.MvcApp2.Controllers
 {
     public class BlogController : Controller
     {
-        private readonly RestClient _restClient;
+        private readonly IBlogApi _blogApi;
 
-        public BlogController(RestClient restClient)
+        public BlogController(IBlogApi blogApi)
         {
-            _restClient = restClient;
+            _blogApi = blogApi;
         }
 
         [ActionName("Index")]
         public async Task<IActionResult> BlogIndex(int pageNo = 1, int pageSize = 10)
         {
-            BlogResponseModel model = new BlogResponseModel();
-
-            RestRequest request = new RestRequest($"api/blog/{pageNo}/{pageSize}", Method.Get);
-            var response = await _restClient.ExecuteAsync(request);
-            if (response.IsSuccessStatusCode)
-            {
-                var jsonStr = response.Content;
-                model = JsonConvert.DeserializeObject<BlogResponseModel>(jsonStr)!;
-            }
+            var model = await _blogApi.GetBlogs(pageNo, pageSize);
             return View("BlogIndex", model);
         }
 
@@ -41,41 +33,28 @@ namespace DotNetCoreTraining.MvcApp2.Controllers
         [ActionName("Save")]
         public async Task<IActionResult> SaveBlog(BlogModel model)
         {
-            RestRequest request = new RestRequest("api/blog", Method.Post);
-            request.AddJsonBody(model);
-            await _restClient.ExecuteAsync(request);
+            await _blogApi.CreateBlog(model);
             return Redirect("/Blog");
         }
 
         [ActionName("Edit")]
         public async Task<IActionResult> EditBlog(int id)
         {
-            BlogModel model = new BlogModel();
-            RestRequest request = new RestRequest($"api/blog/{id}", Method.Get);
-            var response = await _restClient.ExecuteAsync(request);
-            if (!response.IsSuccessStatusCode)
-            {
-                return Redirect("/Blog");
-            }
-            var json = response.Content;
-            model = JsonConvert.DeserializeObject<BlogModel>(json)!;
+            var model = await _blogApi.GetBlogById(id);
             return View("EditBlog", model);
         }
 
         [ActionName("Update")]
-        public async Task<IActionResult> UpdateBlog(int id,BlogModel model)
+        public async Task<IActionResult> UpdateBlog(int id, BlogModel model)
         {
-            RestRequest request = new RestRequest($"api/blog/{id}", Method.Put);
-            request.AddJsonBody(model);
-            await _restClient.PutAsync(request);
+            await _blogApi.UpdateBlog(id, model);
             return Redirect("/Blog");
         }
 
         [ActionName("Delete")]
         public async Task<IActionResult> DeleteBlog(int id)
         {
-            RestRequest request = new RestRequest($"api/blog/{id}", Method.Delete);
-            await _restClient.DeleteAsync(request);
+            await _blogApi.DeleteBlog(id);
             return Redirect("/Blog");
         }
     }
